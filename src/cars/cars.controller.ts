@@ -6,13 +6,10 @@ import {
   Param,
   Patch,
   Post,
-  ParseUUIDPipe,
-  UsePipes,
-  ValidationPipe
+  ParseUUIDPipe
 } from '@nestjs/common'
 import { CarsService } from './cars.service'
-import { CreateCarDto } from './dto/create-car.dto'
-import { UpdateCarDto } from './dto/update-car.dto'
+import { CreateCarDto, UpdateCarDto } from './dto'
 
 // nest g co cars
 // Actualiza su modulo correspondiente
@@ -42,6 +39,6 @@ export class CarsController {
 
   @Delete()
   deleteCar(@Param('id', ParseUUIDPipe) id: string) {
-    return id
+    return this.carsSerice.delete(id)
   }
 }
