@@ -5,23 +5,7 @@ import { CreateCarDto, UpdateCarDto } from './dto'
 //nest g s cars --no-spec
 @Injectable()
 export class CarsService {
-  private cars: Car[] = [
-    {
-      id: uuid(),
-      brand: 'Toyota',
-      model: 'Corolla',
-    },
-    {
-      id: uuid(),
-      brand: 'Lada',
-      model: 'Corolla',
-    },
-    {
-      id: uuid(),
-      brand: 'Mercedes',
-      model: 'Corolla',
-    },
-  ]
+  private cars: Car[] = []
 
   findAll() {
     return this.cars
@@ -55,5 +39,9 @@ export class CarsService {
   delete(id: string) {
     this.getById(id)
     this.cars = this.cars.filter((car: Car) => car.id !== id)
+  }
+
+  fillCarsWithSeedData(cars: Car[]) {
+    this.cars = cars
   }
 }
