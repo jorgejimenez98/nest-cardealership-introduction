@@ -1,19 +1,19 @@
 import { Controller, Get, Param } from '@nestjs/common'
+import { CarsService } from './cars.service'
 
 // nest g co cars
 // Actualiza su modulo correspondiente
 @Controller('cars')
 export class CarsController {
-  private cars = ['Toyota', 'Mercedes', 'Honda']
+  constructor(private readonly carsSerice: CarsService) {}
 
   @Get()
   getAllCars() {
-    return this.cars
+    return this.carsSerice.findAll()
   }
 
   @Get(':id')
-  getCarById(@Param('id') id: number) {
-    console.log({ id })
-    return { car: this.cars[id] }
+  getCarById(@Param('id') id: string) {
+    return this.carsSerice.getById(+id)
   }
 }
