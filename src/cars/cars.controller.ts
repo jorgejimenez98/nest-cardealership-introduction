@@ -6,9 +6,12 @@ import {
   Param,
   Patch,
   Post,
-  ParseUUIDPipe
+  ParseUUIDPipe,
+  UsePipes,
+  ValidationPipe
 } from '@nestjs/common'
 import { CarsService } from './cars.service'
+import { CreateCarDto } from './dto/create-car.dto'
 
 // nest g co cars
 // Actualiza su modulo correspondiente
@@ -27,8 +30,8 @@ export class CarsController {
   }
 
   @Post()
-  createCar(@Body() payload: any) {
-    return payload
+  createCar(@Body() createCarDto: CreateCarDto) {
+    return createCarDto
   }
 
   @Patch(':id')
@@ -37,7 +40,7 @@ export class CarsController {
   }
 
   @Delete()
-  deleteCar(@Param('id') id: string) {
+  deleteCar(@Param('id', ParseUUIDPipe) id: string) {
     return id
   }
 }
