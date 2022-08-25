@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common'
 import { CarsService } from './cars.service'
 import { CreateCarDto } from './dto/create-car.dto'
+import { UpdateCarDto } from './dto/update-car.dto'
 
 // nest g co cars
 // Actualiza su modulo correspondiente
@@ -35,8 +36,8 @@ export class CarsController {
   }
 
   @Patch(':id')
-  updateCar(@Param('id', ParseUUIDPipe) id: string, @Body() payload: any) {
-    return payload
+  updateCar(@Param('id', ParseUUIDPipe) id: string, @Body() updateCarDto: UpdateCarDto) {
+    return this.carsSerice.update(id, updateCarDto)
   }
 
   @Delete()
